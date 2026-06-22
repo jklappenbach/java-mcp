@@ -3,6 +3,7 @@ micronaut = "4.7.6"
 micronautPlugin = "4.4.4"
 shadow = "8.3.6"
 junit = "5.11.3"
+snakeyaml = "2.3"
 
 [plugins]
 micronaut-application = { id = "io.micronaut.application", version.ref = "micronautPlugin" }
@@ -11,3 +12,4 @@ shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 [libraries]
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+snakeyaml = { module = "org.yaml:snakeyaml", version.ref = "snakeyaml" }

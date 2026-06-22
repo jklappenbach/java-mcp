@@ -59,15 +59,18 @@ packaging.** Behavioral + `skill://` parity with cajeta.
 ## 1. Skill model + front-matter parser  (skill-core)
 *Depends: 0. Satisfies spec §2.1.1, §2.3.*
 - **TDD**
-  - [ ] 1.1.1 Parsing a skill `.md` yields `title`, optional `description`, optional
+  - [x] 1.1.1 Parsing a skill `.md` yields `title`, optional `description`, optional
         `inventory[]` (name+title), optional `references[]`, and a verbatim body.
-  - [ ] 1.1.2 Malformed YAML front-matter fails loud, naming the file; missing
+  - [x] 1.1.2 Malformed YAML front-matter fails loud, naming the file; missing
         front-matter is allowed (title defaults to the leaf name).
 - **Coding**
-  - [ ] 1.2.1 `SkillDoc` (title, description, inventory, references, body) + front-matter
+  - [x] 1.2.1 `SkillDoc` (title, description, inventory, references, body) + front-matter
         Markdown parser. No `id`, no required `applies-to` (path is identity).
+        *(`SkillDoc` record + `InventoryEntry`; `FrontMatter` split; SnakeYAML header;
+        `SkillParseException` always names the source. 8 tests green.)*
 - **Acceptance**
-  - [ ] 1.3.1 Parser round-trips the example tree's files (unit 10 fixtures) without loss.
+  - [~] 1.3.1 Parser round-trips the example tree's files (unit 10 fixtures) without loss.
+        *(blocked on unit 10 fixtures; verify when the example tree lands.)*
 
 ## 2. Path-as-identity: name, URI, coordinate  (skill-core)
 *Depends: 0. Satisfies spec §2.1.3, §2.1.4, §4.1.2.*

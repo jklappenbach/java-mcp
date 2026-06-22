@@ -9,6 +9,8 @@ java {
 }
 
 dependencies {
+    implementation(libs.snakeyaml)
+
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly(libs.junit.platform.launcher)
 }
