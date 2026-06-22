@@ -163,23 +163,27 @@ packaging.** Behavioral + `skill://` parity with cajeta.
         echoes `protocolVersion`; tool results are MCP `content[].text` JSON;
         `StdioTransport` uses `readLine` (no over-read). 12 tests green.)*
 - **Acceptance**
-  - [~] 6.3.1 `--stdio` lifecycle matches the HTTP path for identical inputs (spec §5.2.2).
-        *(stdio relays the shared dispatch core verbatim — proven; the literal
-        HTTP-vs-stdio equality assertion lands in 7.1.1 once the HTTP transport exists.)*
+  - [x] 6.3.1 `--stdio` lifecycle matches the HTTP path for identical inputs (spec §5.2.2).
+        *(unblocked by unit 7: `McpHttpTest.postReturnsSameBodyAsDispatch` asserts the HTTP
+        body equals the shared dispatch core's output, which stdio relays verbatim.)*
 
 ## 7. HTTP transport (Micronaut) + gzip  (server)
 *Depends: 6. Satisfies spec §5.1.2, §5.1.6, §5.2.1, §5.2.4.*
 - **TDD**
-  - [ ] 7.1.1 `@MicronautTest`: `POST /mcp` returns the same JSON-RPC body as stdio; wrong
+  - [x] 7.1.1 `@MicronautTest`: `POST /mcp` returns the same JSON-RPC body as stdio; wrong
         method/path → proper HTTP + JSON-RPC errors.
-  - [ ] 7.1.2 `Accept-Encoding: gzip` → gzip body + header decoding to the plain reply;
+  - [x] 7.1.2 `Accept-Encoding: gzip` → gzip body + header decoding to the plain reply;
         inbound `Content-Encoding: gzip` gunzipped (fail-loud on bad gzip).
-  - [ ] 7.1.3 A notification → HTTP 202, empty body.
+  - [x] 7.1.3 A notification → HTTP 202, empty body.
 - **Coding**
-  - [ ] 7.2.1 A Micronaut `@Controller` `POST /mcp` over the dispatch core, gzip
+  - [x] 7.2.1 A Micronaut `@Controller` `POST /mcp` over the dispatch core, gzip
         negotiation mirroring cajeta's MCP HTTP.
+        *(`McpController` (byte[] body, manual gunzip in / gzip out via `Gzip`), `McpFactory`
+        wires `SkillDiscovery.fromSystemClasspath` + `McpDispatcher` beans; added
+        micronaut-jackson-databind + http-client (test). 11 tests green.)*
 - **Acceptance**
-  - [ ] 7.3.1 HTTP/stdio parity across lifecycle, tools, and errors (spec §5.2.1).
+  - [x] 7.3.1 HTTP/stdio parity across lifecycle, tools, and errors (spec §5.2.1).
+        *(`McpHttpTest` asserts HTTP body == dispatch core; both transports share `McpDispatcher`.)*
 
 ## 8. Uber JAR + Lambda handler + main  (server)
 *Depends: 7. Satisfies spec §6.*

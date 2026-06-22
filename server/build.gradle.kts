@@ -12,6 +12,8 @@ java {
 dependencies {
     implementation(project(":skill-core"))
     implementation(libs.jackson.databind)
+    implementation("io.micronaut:micronaut-jackson-databind")
+    testImplementation("io.micronaut:micronaut-http-client")
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly(libs.junit.platform.launcher)
 }
