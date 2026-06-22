@@ -4,7 +4,6 @@
 # all detail lives in the plan. Completion = plan checkboxes, not here.
 
 ## Active (top = current)
-5
 6
 7
 8

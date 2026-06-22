@@ -130,19 +130,23 @@ packaging.** Behavioral + `skill://` parity with cajeta.
 ## 5. Runtime discovery  (server)
 *Depends: 4. Satisfies spec §4.1.*
 - **TDD**
-  - [ ] 5.1.1 With a synthetic classpath (test jars/dirs carrying `META-INF/skills/**`),
+  - [x] 5.1.1 With a synthetic classpath (test jars/dirs carrying `META-INF/skills/**`),
         enumeration finds every skill entry and builds an aggregate index.
-  - [ ] 5.1.2 `search` (fuzzy + exact), `list` (scoped/all), `get` (URI→payload) correct;
+  - [x] 5.1.2 `search` (fuzzy + exact), `list` (scoped/all), `get` (URI→payload) correct;
         get reports a per-URI error without failing siblings.
-  - [ ] 5.1.3 Two versions of one library on the classpath → bare query returns both,
+  - [x] 5.1.3 Two versions of one library on the classpath → bare query returns both,
         version-tagged.
-  - [ ] 5.1.4 A corrupt/unreadable jar is skipped with a warning; others still serve.
+  - [x] 5.1.4 A corrupt/unreadable jar is skipped with a warning; others still serve.
 - **Coding**
-  - [ ] 5.2.1 `SkillDiscovery`: `ClassLoader.getResources` + jar walk for
+  - [x] 5.2.1 `SkillDiscovery`: `ClassLoader.getResources` + jar walk for
         `META-INF/skills/**.md`; per-entry name+coordinate; aggregate index over unit 3/4;
         search/list/get; offline; resilient to one bad jar.
+        *(`ClasspathScanner` (jar + dir, coordinate via pom.properties→manifest, per-root
+        try/catch); `SkillDiscovery` fromRoots / fromSystemClasspath / fromClassLoader
+        (URLClassLoader uses getURLs — robust vs dir entries). 7 tests green.)*
 - **Acceptance**
-  - [ ] 5.3.1 Discovery is read-only, offline, and one bad jar cannot break it (spec §4.1.7).
+  - [x] 5.3.1 Discovery is read-only, offline, and one bad jar cannot break it (spec §4.1.7).
+        *(no network/writes; corrupt jar skipped + warned, siblings still served.)*
 
 ## 6. MCP dispatch core + stdio transport  (server)
 *Depends: 5. Satisfies spec §5.1.1, §5.1.3, §5.1.4, §5.1.5, §5.2.2.*
