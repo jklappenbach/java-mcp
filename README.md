@@ -88,5 +88,7 @@ library/package/class/method, first call `searchSkills` with its name; if a skil
 - `server/` — Micronaut app: classpath discovery, MCP dispatch, HTTP + stdio, Lambda handler.
 - `plugin-marketplace/` — the in-repo marketplace + the `skill-authoring` plugin.
 - `examples/` — a sample skill-bearing library (`com.acme:widgets`) for end-to-end tests.
+- `integration/` — a fuller demo library (`com.example:notes`) + `run-integration.sh`, which
+  builds everything and prints the `claude mcp add` command to register the server.
 - `tools/mcp/` — `test-stdio.sh` / `test-http.sh` smoke scripts.
 - `docs/specs/`, `agents/` — spec, plan, and work stacks (tracked here).

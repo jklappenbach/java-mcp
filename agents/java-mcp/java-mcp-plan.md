@@ -261,6 +261,22 @@ makes an agent consult skills at all.*
   - [x] 11.3.1 Both transports surface it (shared dispatch core); Lambda parity test still
         holds. README gains a reinforcement `CLAUDE.md` snippet for consumers.
 
+## 12. Integration harness + Claude Code registration
+*Depends: 8. Added 2026-06-22 by request: a fuller demo library + one-command setup that
+registers with Claude Code. Satisfies spec §1.1 (a fresh clone can author/build/run/search).*
+- **Coding**
+  - [x] 12.1.1 `integration/` — a `com.example:notes` library (3 packages: model/store/search;
+        3 classes; 6 methods) with a top-down skill tree (13 nodes, inventories + references,
+        no drift) and a believable Java implementation.
+  - [x] 12.1.2 `integration/run-integration.sh` builds the library jar + server uber jar, puts
+        the library on the classpath, smoke-launches the server to confirm the skills are
+        discoverable, and prints the `claude mcp add` stdio command + next steps.
+- **Acceptance**
+  - [x] 12.2.1 The server registered with `claude mcp add notes-skills -- …` shows
+        `✔ Connected` in `claude mcp list`; driving the registered command end-to-end
+        resolves a typo'd search (`saev`→`save`, dist 1), fetches the library payload, and
+        lists the `NoteStore` subtree — the notes jar's skills are accessible via the tools.
+
 ---
 
 ## Decisions (locked during design, 2026-06-22)

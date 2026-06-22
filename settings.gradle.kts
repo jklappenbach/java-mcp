@@ -19,4 +19,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "java-mcp"
 
-include("skill-core", "server", "examples")
+include("skill-core", "server", "examples", "integration")
