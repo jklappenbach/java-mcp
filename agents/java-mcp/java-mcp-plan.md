@@ -92,17 +92,21 @@ packaging.** Behavioral + `skill://` parity with cajeta.
 ## 3. Aggregate index + hierarchy  (skill-core)
 *Depends: 1, 2. Satisfies spec §2.3.3, §4.1.2, §4.1.4.*
 - **TDD**
-  - [ ] 3.1.1 Building an index from a set of (coordinate, path, front-matter) yields a
+  - [x] 3.1.1 Building an index from a set of (coordinate, path, front-matter) yields a
         name→URI map and the parent→children hierarchy derived from the **tree**.
-  - [ ] 3.1.2 A node whose declared `inventory` omits an actual child produces a **drift
+  - [x] 3.1.2 A node whose declared `inventory` omits an actual child produces a **drift
         warning**, but the child is still indexed (tree is authoritative).
-  - [ ] 3.1.3 Hierarchical query: a node name returns its own + descendant + nearest-
+  - [x] 3.1.3 Hierarchical query: a node name returns its own + descendant + nearest-
         ancestor-overview entries.
 - **Coding**
-  - [ ] 3.2.1 `SkillIndex` built at runtime (names, hierarchy, titles); inventory-drift
+  - [x] 3.2.1 `SkillIndex` built at runtime (names, hierarchy, titles); inventory-drift
         detection; hierarchical/prefix-inclusive query.
+        *(`SkillSource`→`SkillRecord`; `byName`/`byUri`/`all`; `query` returns
+        self+ancestors(nearest→farthest)+descendants; drift scoped per coordinate, both
+        directions. 4 tests green.)*
 - **Acceptance**
-  - [ ] 3.3.1 No shipped index file is required or read (spec §1.4).
+  - [x] 3.3.1 No shipped index file is required or read (spec §1.4). *(`build` takes
+        in-memory `SkillSource`s; no file I/O in skill-core.)*
 
 ## 4. Fuzzy matcher + cajeta parity fixtures  (skill-core)
 *Depends: 3. Satisfies spec §4.1.3, §7.1.1, §7.2.1.*
