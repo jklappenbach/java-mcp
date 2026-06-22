@@ -206,6 +206,12 @@ two ecosystems behave identically.
 - 5.1.5 The `initialize` response **echoes the client's requested `protocolVersion`** (a
   hardcoded version breaks strict clients — a lesson carried over from cajeta).
 - 5.1.6 A notification (no `id`) yields no response body (HTTP 202 / stdio silence).
+- 5.1.7 The `initialize` response carries an **`instructions`** string — the *skill-first
+  trigger*. Because the client always opens the handshake and the server speaks no earlier
+  message, this is the one place to tell the agent **when** to consult skills: *before
+  writing/editing code against any library, package, class, or method, call `searchSkills`
+  first.* A consuming project may additionally pin the rule in its own `CLAUDE.md`
+  (reinforcement, since hosts surface `instructions` to varying degrees).
 
 ### 5.2 Use cases
 - 5.2.1 As an MCP client over HTTP, when I POST `initialize`, then I get a valid result

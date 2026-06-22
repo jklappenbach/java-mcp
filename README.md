@@ -70,6 +70,19 @@ Both send `searchSkills` for `com.acme.widgets/widgets/Widget/opan` (a typo) and
 To author skills for your own library, install the in-repo marketplace and use the
 authoring skill: `/plugin marketplace add <this repo>/plugin-marketplace`.
 
+## The skill-first trigger
+
+The server returns an MCP `instructions` string in its `initialize` result — the handshake's
+only server-spoken message — telling the agent to **call `searchSkills` before writing or
+editing code against a library**. Hosts surface `instructions` to varying degrees, so for
+hard enforcement also pin it in the consuming project's `CLAUDE.md`:
+
+```md
+When the java-mcp server is connected, before writing or editing JVM code that uses a
+library/package/class/method, first call `searchSkills` with its name; if a skill matches,
+`getSkills` it and follow it.
+```
+
 ## Layout
 - `skill-core/` — framework-free skill model, path↔URI mapping, index, fuzzy matcher.
 - `server/` — Micronaut app: classpath discovery, MCP dispatch, HTTP + stdio, Lambda handler.

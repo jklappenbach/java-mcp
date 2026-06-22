@@ -24,6 +24,18 @@ public final class McpDispatcher {
     private static final String SERVER_NAME = "java-mcp";
     private static final String SERVER_VERSION = "0.1.0";
 
+    /**
+     * Surfaced to the model via the {@code initialize} result — the trigger that gets an agent to
+     * consult skills before writing library code. (MCP has no earlier server-spoken message.)
+     */
+    static final String INSTRUCTIONS =
+        "This server provides skills: authoritative, hand-written implementation guides shipped "
+        + "inside JVM libraries. Before you write or edit code that uses a library, package, class, "
+        + "or method, first call searchSkills with its name (fuzzy and typo-tolerant). If a relevant "
+        + "skill is returned, call getSkills to fetch its payload and follow that guidance over your "
+        + "prior assumptions. Use listSkills to browse what is available, and follow a skill's "
+        + "references to related skills.";
+
     private final ObjectMapper mapper;
     private final SkillDiscovery discovery;
 
@@ -90,6 +102,7 @@ public final class McpDispatcher {
         ObjectNode info = result.putObject("serverInfo");
         info.put("name", SERVER_NAME);
         info.put("version", SERVER_VERSION);
+        result.put("instructions", INSTRUCTIONS);
         return ok(id, result);
     }
 

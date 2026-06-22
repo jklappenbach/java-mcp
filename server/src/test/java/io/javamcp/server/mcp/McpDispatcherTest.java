@@ -53,6 +53,15 @@ class McpDispatcherTest {
         assertEquals("2024-11-05", r.get("result").get("protocolVersion").asText());
     }
 
+    // 11.1.1 — initialize carries the skill-first trigger as MCP `instructions`.
+    @Test
+    void initializeCarriesSkillFirstInstructions() throws IOException {
+        JsonNode r = call("{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{}}");
+        String instructions = r.get("result").get("instructions").asText();
+        assertTrue(instructions.contains("searchSkills"), instructions);
+        assertTrue(instructions.toLowerCase().contains("before"), instructions);
+    }
+
     // 6.1.1 — tools/list returns exactly the three skill tools.
     @Test
     void toolsListHasThreeTools() throws IOException {

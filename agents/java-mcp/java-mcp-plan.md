@@ -248,6 +248,19 @@ format units. Satisfies spec §3.*
         skills — documented and demonstrated (spec §1.1). *(smoke scripts demonstrate the
         full path on a clean build; README documents it.)*
 
+## 11. Skill-first trigger (`initialize` instructions)
+*Depends: 6. Satisfies spec §5.1.7. Added 2026-06-22 after the design discussion on what
+makes an agent consult skills at all.*
+- **TDD**
+  - [x] 11.1.1 The `initialize` result carries an `instructions` string naming `searchSkills`
+        and the "before you write code" rule.
+- **Coding**
+  - [x] 11.2.1 Add `McpDispatcher.INSTRUCTIONS` + emit it from `initialize`.
+        *(MCP has no earlier server-spoken message; the handshake result is the only hook.)*
+- **Acceptance**
+  - [x] 11.3.1 Both transports surface it (shared dispatch core); Lambda parity test still
+        holds. README gains a reinforcement `CLAUDE.md` snippet for consumers.
+
 ---
 
 ## Decisions (locked during design, 2026-06-22)
