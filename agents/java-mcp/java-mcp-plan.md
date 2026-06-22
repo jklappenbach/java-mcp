@@ -111,17 +111,21 @@ packaging.** Behavioral + `skill://` parity with cajeta.
 ## 4. Fuzzy matcher + cajeta parity fixtures  (skill-core)
 *Depends: 3. Satisfies spec §4.1.3, §7.1.1, §7.2.1.*
 - **TDD**
-  - [ ] 4.1.1 OSA distance unit tests (insert/delete/substitute/**transpose**=1).
-  - [ ] 4.1.2 Ported cajeta `SkillMatcher` fixtures: segment typo → dist 1, transposition
+  - [x] 4.1.1 OSA distance unit tests (insert/delete/substitute/**transpose**=1).
+  - [x] 4.1.2 Ported cajeta `SkillMatcher` fixtures: segment typo → dist 1, transposition
         → 1, title typo, segment-count mismatch → no match, far-miss → no match — same
         matches/distances/order as cajeta (names split on `/` and `.`).
-  - [ ] 4.1.3 `exact` bypasses fuzzy matching.
+  - [x] 4.1.3 `exact` bypasses fuzzy matching.
 - **Coding**
-  - [ ] 4.2.1 Trigram prefilter; segment-aware name distance (≤2→0, ≤5→1, ≤9→2, else
+  - [x] 4.2.1 Trigram prefilter; segment-aware name distance (≤2→0, ≤5→1, ≤9→2, else
         len/4); token-wise title distance (max(1, len/5)); ranking (distance, name>title,
         lexicographic URI).
+        *(`SkillMatcher` built once per index; name distance case-sensitive, titles
+        case-insensitive, trigram prefilter lowercased — ported 1:1 from cajeta's
+        `SkillMatcher.cpp`. 13 tests green.)*
 - **Acceptance**
-  - [ ] 4.3.1 The ported fixture suite passes — Java matches cajeta's results (spec §7.2.1).
+  - [x] 4.3.1 The ported fixture suite passes — Java matches cajeta's results (spec §7.2.1).
+        *(all 9 cajeta `SkillMatcherTests` fixtures ported to `SkillMatcherParityTest`.)*
 
 ## 5. Runtime discovery  (server)
 *Depends: 4. Satisfies spec §4.1.*
