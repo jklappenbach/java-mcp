@@ -210,18 +210,22 @@ packaging.** Behavioral + `skill://` parity with cajeta.
 *Depends: 1, 2 (format settled). Independent of the runtime; can land any time after the
 format units. Satisfies spec §3.*
 - **TDD**
-  - [ ] 9.1.1 A validation harness: the authoring skill's documented format examples
+  - [x] 9.1.1 A validation harness: the authoring skill's documented format examples
         parse cleanly (unit 1 parser) and place files at the §2.1.4 paths.
-  - [ ] 9.1.2 `.claude-plugin/marketplace.json` validates against the marketplace schema;
+  - [x] 9.1.2 `.claude-plugin/marketplace.json` validates against the marketplace schema;
         the skill is discoverable via `/plugin marketplace add`.
 - **Coding**
-  - [ ] 9.2.1 `plugin-marketplace/` with `marketplace.json` + a plugin shipping
+  - [x] 9.2.1 `plugin-marketplace/` with `marketplace.json` + a plugin shipping
         `skills/<name>/SKILL.md`: level-by-level authoring guide (library→package→
         class/component→method), path-as-identity rules, frontmatter schema, and
         inventory/`references` maintenance.
+        *(`plugin-marketplace/.claude-plugin/marketplace.json` → `skill-authoring` plugin
+        (`.claude-plugin/plugin.json` + `skills/authoring-java-mcp-skills/SKILL.md`);
+        `AuthoringSkillTest` parses the 4 worked examples + validates both manifests. 3
+        tests green.)*
 - **Acceptance**
-  - [ ] 9.3.1 Authoring the example library (unit 10) with the skill produces a tree that
-        discovery indexes with no drift warnings.
+  - [~] 9.3.1 Authoring the example library (unit 10) with the skill produces a tree that
+        discovery indexes with no drift warnings. *(blocked on unit 10's example tree.)*
 
 ## 10. Example library + end-to-end parity & docs
 *Depends: 8, 9. Satisfies spec §7.2, §1.1.*

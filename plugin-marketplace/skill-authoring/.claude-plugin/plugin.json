@@ -1,0 +1,9 @@
+{
+  "name": "skill-authoring",
+  "version": "0.1.0",
+  "description": "Author java-mcp skills in place: a path-as-identity tree under META-INF/skills/, with frontmatter inventories and references.",
+  "author": {
+    "name": "Julian Klappenbach",
+    "url": "https://github.com/jklappenbach"
+  }
+}

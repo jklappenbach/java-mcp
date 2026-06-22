@@ -1,0 +1,18 @@
+{
+  "name": "java-mcp",
+  "owner": {
+    "name": "Julian Klappenbach",
+    "url": "https://github.com/jklappenbach"
+  },
+  "metadata": {
+    "description": "Authoring tools for java-mcp in-place skills (path-as-identity skill trees shipped inside a library's jar).",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "skill-authoring",
+      "source": "./skill-authoring",
+      "description": "Guides a library author level-by-level (library → package → class/component → method) to author java-mcp skills in place under src/main/resources/META-INF/skills/, with correct path-as-identity naming, frontmatter, and per-node inventories."
+    }
+  ]
+}
