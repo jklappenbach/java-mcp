@@ -1,0 +1,19 @@
+# Build outputs
+build/
+out/
+.gradle/
+target/
+*.class
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# OS
+.DS_Store
+
+# NOTE: agents/ is intentionally TRACKED (plans + work stacks live with the code).
