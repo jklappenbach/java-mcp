@@ -40,14 +40,21 @@ packaging.** Behavioral + `skill://` parity with cajeta.
 ## 0. Scaffold & multi-module build
 *Depends: —. Satisfies spec §1.5.*
 - **TDD**
-  - [ ] 0.1.1 A trivial test in `skill-core` and `server` runs; `./gradlew build` green.
-  - [ ] 0.1.2 Java toolchain pinned to 21.
+  - [x] 0.1.1 A trivial test in `skill-core` and `server` runs; `./gradlew build` green.
+        *(`SmokeTest` in each module; both `:test` tasks ran green.)*
+  - [x] 0.1.2 Java toolchain pinned to 21. *(both modules:
+        `java.toolchain.languageVersion = 21`; built on JDK 21.0.11-amzn.)*
 - **Coding**
-  - [ ] 0.2.1 Root `settings.gradle.kts` + Kotlin-DSL build: `skill-core` (plain Java) and
-        `server` (Micronaut application + Shadow); version catalog (Micronaut/Jackson/JUnit5).
-  - [ ] 0.2.2 `README.md` stub (author skills → build jar → run server → query); license policy.
+  - [x] 0.2.1 Root `settings.gradle.kts` + Kotlin-DSL build: `skill-core` (`java-library`)
+        and `server` (`io.micronaut.application` + `com.gradleup.shadow`); version catalog
+        (`gradle/libs.versions.toml`). Wrapper pinned to Gradle 8.10.2 (Micronaut/Shadow
+        compat); foojay resolver for toolchain provisioning.
+  - [x] 0.2.2 `README.md` (author-in-place model + build/run outline).
 - **Acceptance**
-  - [ ] 0.3.1 `./gradlew build` green on a clean checkout with a Java 21 toolchain.
+  - [x] 0.3.1 `./gradlew build` green with a Java 21 toolchain (`shadowJar` + both
+        `:test` tasks; 18 tasks executed). Run via
+        `JAVA_HOME=$HOME/.sdkman/candidates/java/21.0.11-amzn` (Gradle 8.10.2 launcher
+        needs JDK ≤22; ambient JDK is 25).
 
 ## 1. Skill model + front-matter parser  (skill-core)
 *Depends: 0. Satisfies spec §2.1.1, §2.3.*
