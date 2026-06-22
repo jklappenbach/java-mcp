@@ -75,17 +75,19 @@ packaging.** Behavioral + `skill://` parity with cajeta.
 ## 2. Path-as-identity: name, URI, coordinate  (skill-core)
 *Depends: 0. Satisfies spec §2.1.3, §2.1.4, §4.1.2.*
 - **TDD**
-  - [ ] 2.1.1 `META-INF/skills/com.acme.widgets/widgets/Widget/open.md` → canonical name
+  - [x] 2.1.1 `META-INF/skills/com.acme.widgets/widgets/Widget/open.md` → canonical name
         `com.acme.widgets/widgets/Widget/open`; the library/package/class/method levels
         map per §2.1.4.
-  - [ ] 2.1.2 Coordinate extraction reads `META-INF/maven/<g>/<a>/pom.properties`, falls
+  - [x] 2.1.2 Coordinate extraction reads `META-INF/maven/<g>/<a>/pom.properties`, falls
         back to the manifest, and composes `skill://<g>:<a>@<v>/<name>`; round-trips via parse.
-  - [ ] 2.1.3 A path outside `META-INF/skills/` or a non-`.md` entry is rejected/ignored.
+  - [x] 2.1.3 A path outside `META-INF/skills/` or a non-`.md` entry is rejected/ignored.
 - **Coding**
-  - [ ] 2.2.1 `SkillName` (path↔canonical name) + `SkillUri{group, artifact, version, name}`
+  - [x] 2.2.1 `SkillName` (path↔canonical name) + `SkillUri{group, artifact, version, name}`
         (`skill://<g>:<a>@<v>/<name>`) + a jar-coordinate reader.
+        *(`SkillName.fromResourcePath` → `Optional` (ignore-not-error); `SkillUri` parse/format;
+        `SkillCoordinate` pom.properties → manifest fallback → `toUri`. 17 tests green.)*
 - **Acceptance**
-  - [ ] 2.2.2 A URI is reconstructable from path + jar coordinate alone (spec §2.2.2).
+  - [x] 2.2.2 A URI is reconstructable from path + jar coordinate alone (spec §2.2.2).
 
 ## 3. Aggregate index + hierarchy  (skill-core)
 *Depends: 1, 2. Satisfies spec §2.3.3, §4.1.2, §4.1.4.*
