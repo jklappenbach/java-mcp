@@ -151,16 +151,21 @@ packaging.** Behavioral + `skill://` parity with cajeta.
 ## 6. MCP dispatch core + stdio transport  (server)
 *Depends: 5. Satisfies spec §5.1.1, §5.1.3, §5.1.4, §5.1.5, §5.2.2.*
 - **TDD**
-  - [ ] 6.1.1 Golden JSON-RPC: `initialize` (result **echoes the client's
+  - [x] 6.1.1 Golden JSON-RPC: `initialize` (result **echoes the client's
         `protocolVersion`**), `tools/list` (the three tools), and each tool call.
-  - [ ] 6.1.2 Parse error → `-32700`; a notification (no id) yields no response.
-  - [ ] 6.1.3 stdio framing: newline-delimited, multiple messages over one held-open
+  - [x] 6.1.2 Parse error → `-32700`; a notification (no id) yields no response.
+  - [x] 6.1.3 stdio framing: newline-delimited, multiple messages over one held-open
         stream — no blocking/over-read regression (cajeta lesson).
 - **Coding**
-  - [ ] 6.2.1 Transport-agnostic `dispatch` + `searchSkills`/`listSkills`/`getSkills`
+  - [x] 6.2.1 Transport-agnostic `dispatch` + `searchSkills`/`listSkills`/`getSkills`
         handlers over `SkillDiscovery`; a `StdioTransport` loop.
+        *(`McpDispatcher` (Jackson) is the single core for both transports; `initialize`
+        echoes `protocolVersion`; tool results are MCP `content[].text` JSON;
+        `StdioTransport` uses `readLine` (no over-read). 12 tests green.)*
 - **Acceptance**
-  - [ ] 6.3.1 `--stdio` lifecycle matches the HTTP path for identical inputs (spec §5.2.2).
+  - [~] 6.3.1 `--stdio` lifecycle matches the HTTP path for identical inputs (spec §5.2.2).
+        *(stdio relays the shared dispatch core verbatim — proven; the literal
+        HTTP-vs-stdio equality assertion lands in 7.1.1 once the HTTP transport exists.)*
 
 ## 7. HTTP transport (Micronaut) + gzip  (server)
 *Depends: 6. Satisfies spec §5.1.2, §5.1.6, §5.2.1, §5.2.4.*

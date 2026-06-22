@@ -12,12 +12,12 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 
 /** Test helpers: synthetic skill-bearing jars and class directories. */
-final class Fixtures {
+public final class Fixtures {
 
     private Fixtures() {}
 
     /** Front-matter for a node with a title and optional inventory of child canonical names. */
-    static String node(String title, String... childNames) {
+    public static String node(String title, String... childNames) {
         StringBuilder sb = new StringBuilder("---\ntitle: ").append(title).append('\n');
         if (childNames.length > 0) {
             sb.append("inventory:\n");
@@ -29,7 +29,7 @@ final class Fixtures {
     }
 
     /** A correct 5-node acme tree (no inventory drift). Keys are canonical names → content. */
-    static Map<String, String> acmeTree() {
+    public static Map<String, String> acmeTree() {
         Map<String, String> m = new LinkedHashMap<>();
         m.put("com.acme.widgets", node("Widgets", "com.acme.widgets/widgets"));
         m.put("com.acme.widgets/widgets", node("widgets package", "com.acme.widgets/widgets/Widget"));
@@ -40,7 +40,7 @@ final class Fixtures {
         return m;
     }
 
-    static Path writeJar(Path jarPath, SkillCoordinate c, Map<String, String> skills) throws IOException {
+    public static Path writeJar(Path jarPath, SkillCoordinate c, Map<String, String> skills) throws IOException {
         try (JarOutputStream jos = new JarOutputStream(Files.newOutputStream(jarPath))) {
             if (c != null) {
                 put(jos, "META-INF/maven/" + c.group() + "/" + c.artifact() + "/pom.properties", pom(c));
@@ -52,7 +52,7 @@ final class Fixtures {
         return jarPath;
     }
 
-    static Path writeDir(Path root, SkillCoordinate c, Map<String, String> skills) throws IOException {
+    public static Path writeDir(Path root, SkillCoordinate c, Map<String, String> skills) throws IOException {
         if (c != null) {
             Path pom = root.resolve("META-INF/maven/" + c.group() + "/" + c.artifact() + "/pom.properties");
             Files.createDirectories(pom.getParent());
