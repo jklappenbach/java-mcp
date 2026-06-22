@@ -4,4 +4,4 @@
 # all detail lives in the plan. Completion = plan checkboxes, not here.
 
 ## Active (top = current)
-10
+# (empty — all 11 units complete; plan checkboxes are the record)

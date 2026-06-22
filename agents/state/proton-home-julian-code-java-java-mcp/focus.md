@@ -4,4 +4,4 @@
 # clone-id: proton-home-julian-code-java-java-mcp
 
 ## Frame stack (top = now)
-[java-mcp]
+# (empty — java-mcp plan complete; no active frame)

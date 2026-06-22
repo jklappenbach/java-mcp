@@ -69,8 +69,9 @@ packaging.** Behavioral + `skill://` parity with cajeta.
         *(`SkillDoc` record + `InventoryEntry`; `FrontMatter` split; SnakeYAML header;
         `SkillParseException` always names the source. 8 tests green.)*
 - **Acceptance**
-  - [~] 1.3.1 Parser round-trips the example tree's files (unit 10 fixtures) without loss.
-        *(blocked on unit 10 fixtures; verify when the example tree lands.)*
+  - [x] 1.3.1 Parser round-trips the example tree's files (unit 10 fixtures) without loss.
+        *(unblocked: `ExampleLibraryE2ETest` discovers (parses) all 5 example skills and
+        round-trips the open skill's body via `getSkills`.)*
 
 ## 2. Path-as-identity: name, URI, coordinate  (skill-core)
 *Depends: 0. Satisfies spec §2.1.3, §2.1.4, §4.1.2.*
@@ -224,21 +225,28 @@ format units. Satisfies spec §3.*
         `AuthoringSkillTest` parses the 4 worked examples + validates both manifests. 3
         tests green.)*
 - **Acceptance**
-  - [~] 9.3.1 Authoring the example library (unit 10) with the skill produces a tree that
-        discovery indexes with no drift warnings. *(blocked on unit 10's example tree.)*
+  - [x] 9.3.1 Authoring the example library (unit 10) with the skill produces a tree that
+        discovery indexes with no drift warnings. *(`ExampleLibraryE2ETest` asserts 5 skills
+        indexed with empty warnings — the tree was authored from the SKILL.md's examples.)*
 
 ## 10. Example library + end-to-end parity & docs
 *Depends: 8, 9. Satisfies spec §7.2, §1.1.*
 - **TDD**
-  - [ ] 10.1.1 An `examples/` skill-bearing library (authored via the unit-9 skill), built
+  - [x] 10.1.1 An `examples/` skill-bearing library (authored via the unit-9 skill), built
         and placed on the server's classpath, is discovered and fuzzy-searched end-to-end
         via the MCP tools — results consistent with cajeta semantics.
+        *(`ExampleLibraryE2ETest`: 5 skills, no drift; typo `opan`→`open` at distance 1;
+        get returns the authored body; scoped list returns the class + 2 methods.)*
 - **Coding**
-  - [ ] 10.2.1 The example module + authored sample skill tree; `README.md` completed;
+  - [x] 10.2.1 The example module + authored sample skill tree; `README.md` completed;
         a `test-stdio.sh` / `test-http.sh` smoke pair mirroring cajeta's.
+        *(`examples/` `com.acme:widgets` (coordinate via jar manifest) with the 5-node tree;
+        README author→build→run→search walkthrough; `tools/mcp/test-stdio.sh` +
+        `test-http.sh` both PASS for real.)*
 - **Acceptance**
-  - [ ] 10.3.1 A fresh clone can author (in place), build, run the server, and search
-        skills — documented and demonstrated (spec §1.1).
+  - [x] 10.3.1 A fresh clone can author (in place), build, run the server, and search
+        skills — documented and demonstrated (spec §1.1). *(smoke scripts demonstrate the
+        full path on a clean build; README documents it.)*
 
 ---
 

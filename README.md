@@ -40,14 +40,40 @@ authors through identifying and writing these skills level-by-level.
 # Gradle runs on JDK 21 (the Lambda-managed-runtime target); the toolchain resolves it.
 JAVA_HOME="$HOME/.sdkman/candidates/java/21.0.11-amzn" ./gradlew build
 
-# (later units) run locally over HTTP, or stdio for a local MCP client:
-#   java -jar server/build/libs/server-all.jar
-#   java -jar server/build/libs/server-all.jar --stdio
+# run locally over HTTP (POST /mcp), or stdio for a local MCP client:
+java -jar server/build/libs/server-0.1.0-SNAPSHOT-all.jar            # HTTP
+java -jar server/build/libs/server-0.1.0-SNAPSHOT-all.jar --stdio    # stdio
 ```
+
+The server discovers skills from **its runtime classpath**, so put the skill-bearing
+libraries you want served alongside it:
+
+```bash
+java -cp "server-…-all.jar:my-lib.jar" io.javamcp.server.Application --stdio
+```
+
+The Lambda deployment uses `io.javamcp.server.McpLambdaHandler` (API Gateway proxy, v1).
+
+## Try it end-to-end
+
+The `examples/` module is a sample library (`com.acme:widgets`) whose skill tree is authored
+in place. Build it, put it on the server's classpath, and fuzzy-search through the MCP tools:
+
+```bash
+tools/mcp/test-stdio.sh   # builds, runs over stdio, asserts a typo'd search resolves
+tools/mcp/test-http.sh    # same over HTTP POST /mcp
+```
+
+Both send `searchSkills` for `com.acme.widgets/widgets/Widget/opan` (a typo) and get back
+`skill://com.acme:widgets@1.0.0/com.acme.widgets/widgets/Widget/open` at edit distance 1.
+
+To author skills for your own library, install the in-repo marketplace and use the
+authoring skill: `/plugin marketplace add <this repo>/plugin-marketplace`.
 
 ## Layout
 - `skill-core/` — framework-free skill model, path↔URI mapping, index, fuzzy matcher.
 - `server/` — Micronaut app: classpath discovery, MCP dispatch, HTTP + stdio, Lambda handler.
-- `plugin-marketplace/` — the in-repo marketplace + authoring skill *(later unit)*.
-- `examples/` — a sample skill-bearing library for end-to-end tests *(later unit)*.
+- `plugin-marketplace/` — the in-repo marketplace + the `skill-authoring` plugin.
+- `examples/` — a sample skill-bearing library (`com.acme:widgets`) for end-to-end tests.
+- `tools/mcp/` — `test-stdio.sh` / `test-http.sh` smoke scripts.
 - `docs/specs/`, `agents/` — spec, plan, and work stacks (tracked here).

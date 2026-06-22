@@ -36,6 +36,8 @@ application {
 
 tasks.test {
     useJUnitPlatform()
+    // The end-to-end test discovers skills out of the built example library jar.
+    dependsOn(":examples:jar")
 }
 
 tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
