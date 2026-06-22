@@ -10,9 +10,11 @@ java {
 }
 
 dependencies {
+    implementation(platform("io.micronaut.platform:micronaut-platform:${libs.versions.micronaut.get()}"))
     implementation(project(":skill-core"))
     implementation(libs.jackson.databind)
     implementation("io.micronaut:micronaut-jackson-databind")
+    implementation("io.micronaut.aws:micronaut-function-aws-api-proxy")
     testImplementation("io.micronaut:micronaut-http-client")
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly(libs.junit.platform.launcher)
@@ -34,4 +36,8 @@ application {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+    mergeServiceFiles()
 }

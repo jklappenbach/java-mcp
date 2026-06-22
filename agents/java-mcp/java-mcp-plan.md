@@ -188,15 +188,23 @@ packaging.** Behavioral + `skill://` parity with cajeta.
 ## 8. Uber JAR + Lambda handler + main  (server)
 *Depends: 7. Satisfies spec §6.*
 - **TDD**
-  - [ ] 8.1.1 An API-Gateway proxy event driven through the Micronaut Lambda handler
+  - [x] 8.1.1 An API-Gateway proxy event driven through the Micronaut Lambda handler
         yields the expected `/mcp` JSON-RPC response (no real AWS).
-  - [ ] 8.1.2 `shadowJar` builds a runnable uber jar; `java -jar … --stdio` answers
+  - [x] 8.1.2 `shadowJar` builds a runnable uber jar; `java -jar … --stdio` answers
         `tools/list`; bundled dependency skill trees are discoverable in the uber jar.
+        *(uber jar built + run for real: `--stdio` answered `tools/list`, exit 0, clean
+        stderr; bundled-skill discovery covered by `ApplicationStdioTest`; full e2e with a
+        real bundled tree is unit 10.)*
 - **Coding**
-  - [ ] 8.2.1 Shadow config; the API-Gateway proxy handler over `/mcp`; a `main` (HTTP
+  - [x] 8.2.1 Shadow config; the API-Gateway proxy handler over `/mcp`; a `main` (HTTP
         default, `--stdio` opt-in).
+        *(`McpLambdaHandler extends ApiGatewayProxyRequestEventFunction` (payload v1);
+        `Application.main` routes `--stdio`→`runStdio`, else `Micronaut.run`; shadowJar
+        `mergeServiceFiles()`; micronaut-platform BOM + function-aws-api-proxy. 2 JUnit
+        tests + real-jar run.)*
 - **Acceptance**
-  - [ ] 8.3.1 Deployed-shape parity: handler response == local HTTP response (spec §6.2.1).
+  - [x] 8.3.1 Deployed-shape parity: handler response == local HTTP response (spec §6.2.1).
+        *(`McpLambdaHandlerTest` asserts the API-Gateway handler body == the dispatch core.)*
 
 ## 9. Authoring skill + in-repo plugin-marketplace
 *Depends: 1, 2 (format settled). Independent of the runtime; can land any time after the
