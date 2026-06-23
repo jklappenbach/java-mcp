@@ -78,6 +78,30 @@ After adding or removing a skill file, update the parent's `inventory` to match 
 `references` from a method to the skills an agent will want next. Run the server (or its discovery)
 and confirm there are **no drift warnings**.
 
+## Optional setup: wire the skill-first rule into CLAUDE.md
+
+The java-mcp server already advertises a skill-first trigger in its MCP `initialize` response, so a
+connected client is told to consult skills before writing library code. Some hosts surface that only
+weakly, so a project can *opt in* to a durable rule in its own `CLAUDE.md`.
+
+This is **offer-only setup guidance, not server behavior** — the rule belongs to the user's project,
+not to any server, so:
+
+- **Offer; never write it silently.** Ask the developer whether to add the rule, and only edit
+  `CLAUDE.md` on an explicit yes.
+- **Be idempotent.** If an equivalent skill-first rule is already present, do nothing — don't
+  duplicate or re-ask.
+- **Attribute it.** Make clear the rule was added at the developer's request to use the java-mcp
+  server, so it's easy to find and remove.
+
+Suggested rule to append to the project's `CLAUDE.md`:
+
+```text
+When the java-mcp server is connected, before writing or editing JVM code that uses a
+library/package/class/method, first call `searchSkills` with its name; if a skill matches,
+`getSkills` it and follow it.
+```
+
 ## Worked examples
 
 Library overview — `com.acme.widgets.md`:

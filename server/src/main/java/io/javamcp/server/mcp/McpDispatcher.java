@@ -22,7 +22,7 @@ public final class McpDispatcher {
 
     private static final String DEFAULT_PROTOCOL = "2024-11-05";
     private static final String SERVER_NAME = "java-mcp";
-    private static final String SERVER_VERSION = "0.5.0";
+    private static final String SERVER_VERSION = "0.5.1";
 
     /**
      * Surfaced to the model via the {@code initialize} result — the trigger that gets an agent to

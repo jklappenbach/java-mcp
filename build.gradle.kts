@@ -1,6 +1,6 @@
 allprojects {
     group = "io.javamcp"
-    version = "0.5.0"
+    version = "0.5.1"
 }
 
 // Used by the release workflow to assert the git tag matches the built version.

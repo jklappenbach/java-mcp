@@ -43,8 +43,8 @@ authors through identifying and writing these skills level-by-level.
 JAVA_HOME="$HOME/.sdkman/candidates/java/21.0.11-amzn" ./gradlew build
 
 # run locally over HTTP (POST /mcp), or stdio for a local MCP client:
-java -jar server/build/libs/server-0.5.0-all.jar            # HTTP
-java -jar server/build/libs/server-0.5.0-all.jar --stdio    # stdio
+java -jar server/build/libs/server-0.5.1-all.jar            # HTTP
+java -jar server/build/libs/server-0.5.1-all.jar --stdio    # stdio
 ```
 
 The server discovers skills from **its runtime classpath**, so put the skill-bearing
@@ -93,8 +93,8 @@ library/package/class/method, first call `searchSkills` with its name; if a skil
   matches the project version, builds, and publishes a GitHub Release with the uber jar attached.
 
 ```bash
-# cut release 0.5.0 (the version in build.gradle.kts)
-git tag v0.5.0 && git push origin v0.5.0
+# cut release 0.5.1 (the version in build.gradle.kts)
+git tag v0.5.1 && git push origin v0.5.1
 ```
 
 ## Layout
