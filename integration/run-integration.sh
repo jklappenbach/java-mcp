@@ -14,7 +14,7 @@ JAVA="${JAVA_HOME:+$JAVA_HOME/bin/}java"
 echo "==> Building the integration library jar and the MCP server uber jar..."
 "$ROOT/gradlew" -p "$ROOT" -q :integration:jar :server:shadowJar
 
-SERVER_JAR=$(ls "$ROOT"/server/build/libs/*-all.jar | head -1)
+SERVER_JAR=$(ls -t "$ROOT"/server/build/libs/*-all.jar | head -1)
 INTEGRATION_JAR=$(ls "$ROOT"/integration/build/libs/*.jar | grep -v -- '-sources' | head -1)
 CP="$SERVER_JAR:$INTEGRATION_JAR"
 

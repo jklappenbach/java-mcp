@@ -11,7 +11,7 @@ fi
 
 "$ROOT/gradlew" -p "$ROOT" -q :server:shadowJar :examples:jar
 
-SERVER_JAR=$(ls "$ROOT"/server/build/libs/*-all.jar | head -1)
+SERVER_JAR=$(ls -t "$ROOT"/server/build/libs/*-all.jar | head -1)
 EXAMPLE_JAR=$(ls "$ROOT"/examples/build/libs/*.jar | grep -v -- '-sources' | head -1)
 
 INIT='{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18"}}'

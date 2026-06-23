@@ -12,7 +12,7 @@ PORT="${PORT:-18080}"
 
 "$ROOT/gradlew" -p "$ROOT" -q :server:shadowJar :examples:jar
 
-SERVER_JAR=$(ls "$ROOT"/server/build/libs/*-all.jar | head -1)
+SERVER_JAR=$(ls -t "$ROOT"/server/build/libs/*-all.jar | head -1)
 EXAMPLE_JAR=$(ls "$ROOT"/examples/build/libs/*.jar | grep -v -- '-sources' | head -1)
 
 "$JAVA_HOME/bin/java" -Dmicronaut.server.port="$PORT" \

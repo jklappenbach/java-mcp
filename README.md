@@ -1,5 +1,7 @@
 # java-mcp
 
+[![CI](https://github.com/jklappenbach/java-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/jklappenbach/java-mcp/actions/workflows/ci.yml)
+
 A **Micronaut** uber-JAR **MCP (Model Context Protocol) server** for the JVM ecosystem.
 It discovers **skills** — short, hand-authored implementation guides that travel
 *inside* a library's jar — by scanning every jar on its classpath, indexes them, and
@@ -41,8 +43,8 @@ authors through identifying and writing these skills level-by-level.
 JAVA_HOME="$HOME/.sdkman/candidates/java/21.0.11-amzn" ./gradlew build
 
 # run locally over HTTP (POST /mcp), or stdio for a local MCP client:
-java -jar server/build/libs/server-0.1.0-SNAPSHOT-all.jar            # HTTP
-java -jar server/build/libs/server-0.1.0-SNAPSHOT-all.jar --stdio    # stdio
+java -jar server/build/libs/server-0.5.0-all.jar            # HTTP
+java -jar server/build/libs/server-0.5.0-all.jar --stdio    # stdio
 ```
 
 The server discovers skills from **its runtime classpath**, so put the skill-bearing
@@ -81,6 +83,18 @@ hard enforcement also pin it in the consuming project's `CLAUDE.md`:
 When the java-mcp server is connected, before writing or editing JVM code that uses a
 library/package/class/method, first call `searchSkills` with its name; if a skill matches,
 `getSkills` it and follow it.
+```
+
+## CI / releases
+
+- **CI** (`.github/workflows/ci.yml`) runs `./gradlew build` (all module tests) on every push
+  to `main` and every PR, on a Temurin JDK 21, and uploads the server uber jar as an artifact.
+- **Release** (`.github/workflows/release.yml`) fires on a `vX.Y.Z` tag: it asserts the tag
+  matches the project version, builds, and publishes a GitHub Release with the uber jar attached.
+
+```bash
+# cut release 0.5.0 (the version in build.gradle.kts)
+git tag v0.5.0 && git push origin v0.5.0
 ```
 
 ## Layout

@@ -15,7 +15,7 @@ JAVA="${JAVA_HOME:+$JAVA_HOME/bin/}java"
 PORT="${PORT:-8765}"
 
 "$ROOT/gradlew" -p "$ROOT" -q :integration:jar :server:shadowJar
-SERVER_JAR=$(ls "$ROOT"/server/build/libs/*-all.jar | head -1)
+SERVER_JAR=$(ls -t "$ROOT"/server/build/libs/*-all.jar | head -1)
 INTEGRATION_JAR=$(ls "$ROOT"/integration/build/libs/*.jar | grep -v -- '-sources' | head -1)
 
 echo "Starting java-mcp HTTP server on port $PORT (POST http://localhost:$PORT/mcp)"

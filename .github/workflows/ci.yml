@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # JDK 21: satisfies the Gradle toolchain and runs the pinned Gradle 8.10.2 wrapper.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+
+      - name: Build and test
+        run: ./gradlew build --no-daemon --stacktrace
+
+      - name: Upload server uber jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: server-uber-jar
+          path: server/build/libs/*-all.jar
+          if-no-files-found: error
